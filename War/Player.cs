@@ -17,11 +17,11 @@ namespace War
             Name = name;
         }
 
-        public Card DrawCard(Deck deck)
+        public Card DrawCard()
         {
-            Card drawnCard = deck.Cards[0];
-            Console.WriteLine(Name + " played the " + drawnCard.Value + " of " + drawnCard.Suit + " Rank: " + drawnCard.Rank);
-            deck.RemoveCard();
+            Random random = new Random();
+            Card drawnCard = Cards[random.Next(0, Cards.Count)];
+            Console.WriteLine(Name + " played the " + drawnCard.Value + " of " + drawnCard.Suit);
             drawnCard.DrawnBy = Name;
             return drawnCard;
         }

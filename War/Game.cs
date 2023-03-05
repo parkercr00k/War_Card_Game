@@ -11,6 +11,8 @@ namespace War
         public Deck GameDeck { get; set; }
         public Player PlayerOne { get; set; }
         public Player PlayerTwo { get; set; }
+        public List<Card> CardsInWar { get; set; } = new List<Card>();
+        public bool InWar { get; set; }
 
         public Game(Deck deck, Player playerOne, Player playerTwo)
         {
@@ -20,20 +22,100 @@ namespace War
 
         }
 
-        public void CompareCards(Card p1Card, Card p2Card)
+        public void DealCards()
         {
-            if(p1Card.Rank > p2Card.Rank)
+            GameDeck.Shuffle();
+            for (int i = 0; i < (GameDeck.Cards.Count - 1); i += 2)
             {
-                Console.WriteLine(p1Card.DrawnBy + " wins the battle with the " + p1Card.Value + " of " + p1Card.Suit + " !");
+                PlayerOne.Cards.Add(GameDeck.Cards[i]);
+                PlayerTwo.Cards.Add(GameDeck.Cards[i + 1]);
             }
-            else if(p2Card.Rank > p1Card.Rank)
+        }
+
+        public string CompareCards(Card p1Card, Card p2Card)
+        {
+            string outcome = "";
+            if (p1Card.Rank > p2Card.Rank)
             {
-                Console.WriteLine(p2Card.DrawnBy + " wins the battle with the " + p2Card.Value + " of " + p2Card.Suit + " !");
+                Console.WriteLine();
+                Console.WriteLine(p1Card.DrawnBy + " wins the battle with the " + p1Card.Value + " of " + p1Card.Suit + "!");
+                PlayerOne.Cards.Add(p2Card);
+                PlayerTwo.Cards.Remove(p2Card);
+
+                CheckForWar(PlayerOne);
+                
             }
-            else if(p1Card.Rank == p2Card.Rank)
+            else if (p2Card.Rank > p1Card.Rank)
             {
+                Console.WriteLine();
+                Console.WriteLine(p2Card.DrawnBy + " wins the battle with the " + p2Card.Value + " of " + p2Card.Suit + "!");
+                PlayerTwo.Cards.Add(p1Card);
+                PlayerOne.Cards.Remove(p1Card);
+
+                CheckForWar(PlayerTwo);
+
+            }
+            else if (p1Card.Rank == p2Card.Rank)
+            {
+                InWar = true;
+                Console.WriteLine();
                 Console.WriteLine("It's a tie! Let's go to War!");
+
+                CardsInWar.Add(p1Card);
+                PlayerOne.Cards.Remove(p1Card);
+                CardsInWar.Add(p2Card);
+                PlayerTwo.Cards.Remove(p2Card);
             }
+            return outcome;
+        }
+
+        public string PlayTurn()
+        {
+            string turnOutcome;
+            if (PlayerOne.Cards.Count == 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine("GAME OVER: " + PlayerTwo.Name + " wins the game!");
+                turnOutcome = "p2win";
+            }
+            else if (PlayerTwo.Cards.Count == 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine("GAME OVER: " + PlayerOne.Name + " wins the game!");
+                turnOutcome = "p1win";
+            }
+            else
+            {
+                Console.ReadKey(true);
+                Console.Clear();
+                Card drawnCard1 = PlayerOne.DrawCard();
+                Card drawnCard2 = PlayerTwo.DrawCard();
+                turnOutcome = CompareCards(drawnCard1, drawnCard2);
+                Console.WriteLine();
+                Console.WriteLine(PlayerOne.Name + " Cards: " + PlayerOne.Cards.Count);
+                Console.WriteLine(PlayerTwo.Name + " Cards: " + PlayerTwo.Cards.Count);
+            }
+
+            return turnOutcome;
+        }
+
+        public void CheckForWar(Player player)
+        {
+            if (InWar)
+            {
+                CollectSpoilsOfWar(player);
+            }
+        }
+
+        public void CollectSpoilsOfWar(Player player)
+        {
+            foreach (Card card in CardsInWar)
+            {
+                player.Cards.Add(card);
+            }
+
+            CardsInWar.Clear();
+            InWar = false;
         }
     }
 }
