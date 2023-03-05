@@ -11,3 +11,11 @@ List<Card> c = deck.CreateClubs();
 List<Card> fullDeck = deck.CreateDeck(d, h, s, c);
 
 // Deck is created
+Console.WriteLine("     Welcome to the game of War       ");
+Console.WriteLine(" ------    ------    ------    ------");
+Console.WriteLine("|A     |  |K     |  |Q     |  |J     |");
+Console.WriteLine("|      |  |      |  |      |  |      |");
+Console.WriteLine("|      |  |      |  |      |  |      |");
+Console.WriteLine("|      |  |      |  |      |  |      |");
+Console.WriteLine("|     A|  |     K|  |     Q|  |     J|");
+Console.WriteLine(" ------    ------    ------    ------");

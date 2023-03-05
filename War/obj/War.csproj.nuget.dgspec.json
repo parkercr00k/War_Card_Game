@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Parker\\source\\repos\\code\\side-projects\\Backend Apps\\War\\War\\War.csproj": {}
+    "C:\\Users\\Parker\\source\\repos\\code\\side-projects\\Backend Apps\\war\\War\\War.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Parker\\source\\repos\\code\\side-projects\\Backend Apps\\War\\War\\War.csproj": {
+    "C:\\Users\\Parker\\source\\repos\\code\\side-projects\\Backend Apps\\war\\War\\War.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Parker\\source\\repos\\code\\side-projects\\Backend Apps\\War\\War\\War.csproj",
+        "projectUniqueName": "C:\\Users\\Parker\\source\\repos\\code\\side-projects\\Backend Apps\\war\\War\\War.csproj",
         "projectName": "War",
-        "projectPath": "C:\\Users\\Parker\\source\\repos\\code\\side-projects\\Backend Apps\\War\\War\\War.csproj",
+        "projectPath": "C:\\Users\\Parker\\source\\repos\\code\\side-projects\\Backend Apps\\war\\War\\War.csproj",
         "packagesPath": "C:\\Users\\Parker\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Parker\\source\\repos\\code\\side-projects\\Backend Apps\\War\\War\\obj\\",
+        "outputPath": "C:\\Users\\Parker\\source\\repos\\code\\side-projects\\Backend Apps\\war\\War\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Parker\\AppData\\Roaming\\NuGet\\NuGet.Config",
