@@ -8,54 +8,60 @@ namespace War
 {
     public class Card
     {
-        public string? Suit { get; set; }
-        public string? Value { get; set; }
+        public string Suit { get; set; } = "";
+        public string Value { get; set; } = "";
+        public int Rank { get; set; } = 0;
+        public string DrawnBy { get; set; } = ""; 
     }
 
     public class Deck
     {
-        public List<Card> Shuffle(List<Card> deck)
+
+        public List<Card> Cards { get; set; } = new List<Card>();
+
+        public Deck()
+        {
+            List<Card> d = CreateDiamonds();
+            List<Card> h = CreateHearts();
+            List<Card> s = CreateSpades();
+            List<Card> c = CreateClubs();
+
+
+            foreach (Card card in d)
+            {
+                Cards.Add(card);
+            }
+
+            foreach (Card card in h)
+            {
+                Cards.Add(card);
+            }
+
+            foreach (Card card in s)
+            {
+                Cards.Add(card);
+            }
+
+            foreach (Card card in c)
+            {
+                Cards.Add(card);
+            }
+
+        }
+        public List<Card> Shuffle()
         {
             List<Card> newDeck = new List<Card>();
             Random random = new Random();
             int randCard;
             
-            for(int i = 0; i < 52; i++)
+            for(int i = 0; i < (Cards.Count + newDeck.Count); i++)
             {
-                randCard = random.Next(deck.Count);
-                newDeck.Add(deck[randCard]);
-                deck.Remove(deck[randCard]);
+                randCard = random.Next(Cards.Count);
+                newDeck.Add(Cards[randCard]);
+                Cards.Remove(Cards[randCard]);
             }
-
-            return newDeck;
-        }
-
-        public List<Card> CreateDeck(List<Card> diamonds, List<Card> hearts, List<Card> spades, List<Card> clubs)
-        {
-
-            List<Card> deck = new List<Card>();
-
-            foreach (Card card in diamonds)
-            {
-                deck.Add(card);
-            }
-
-            foreach (Card card in hearts)
-            {
-                deck.Add(card);
-            }
-
-            foreach (Card card in spades)
-            {
-                deck.Add(card);
-            }
-
-            foreach (Card card in clubs)
-            {
-                deck.Add(card);
-            }
-
-            return deck;
+            Cards = newDeck;
+            return Cards;
         }
 
         public List<Card> CreateDiamonds()
@@ -68,6 +74,7 @@ namespace War
                 Card card = new Card();
                 card.Suit = "Diamonds";
                 card.Value = numVal.ToString();
+                card.Rank = numVal;
                 numVal++;
                 cards.Add(card);
             }
@@ -77,6 +84,7 @@ namespace War
                 Card card = new Card();
                 card.Suit = "Diamonds";
                 card.Value = faceVal;
+                card.Rank = numVal;
                 switch (faceVal)
                 {
                     case "J":
@@ -93,6 +101,7 @@ namespace War
                 }
 
                 cards.Add(card);
+                numVal++;
             }
 
             return cards;
@@ -107,6 +116,7 @@ namespace War
                 Card card = new Card();
                 card.Suit = "Hearts";
                 card.Value = numVal.ToString();
+                card.Rank = numVal;
                 numVal++;
                 cards.Add(card);
             }
@@ -116,6 +126,7 @@ namespace War
                 Card card = new Card();
                 card.Suit = "Hearts";
                 card.Value = faceVal;
+                card.Rank = numVal;
                 switch (faceVal)
                 {
                     case "J":
@@ -132,6 +143,7 @@ namespace War
                 }
 
                 cards.Add(card);
+                numVal++;
             }
 
             return cards;
@@ -147,6 +159,7 @@ namespace War
                 Card card = new Card();
                 card.Suit = "Spades";
                 card.Value = numVal.ToString();
+                card.Rank = numVal;
                 numVal++;
                 cards.Add(card);
             }
@@ -156,6 +169,7 @@ namespace War
                 Card card = new Card();
                 card.Suit = "Spades";
                 card.Value = faceVal;
+                card.Rank = numVal;
                 switch (faceVal)
                 {
                     case "J":
@@ -172,6 +186,7 @@ namespace War
                 }
 
                 cards.Add(card);
+                numVal++;
             }
 
             return cards;
@@ -187,6 +202,7 @@ namespace War
                 Card card = new Card();
                 card.Suit = "Clubs";
                 card.Value = numVal.ToString();
+                card.Rank = numVal;
                 numVal++;
                 cards.Add(card);
             }
@@ -196,6 +212,7 @@ namespace War
                 Card card = new Card();
                 card.Suit = "Clubs";
                 card.Value = faceVal;
+                card.Rank = numVal;
                 switch (faceVal)
                 {
                     case "J":
@@ -212,9 +229,15 @@ namespace War
                 }
 
                 cards.Add(card);
+                numVal++;
             }
 
             return cards;
+        }
+
+        public void RemoveCard()
+        {
+            Cards.Remove(Cards[0]);
         }
     }
 
