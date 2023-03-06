@@ -19,6 +19,7 @@ Console.WriteLine("|      |  |      |  |      |  |      |");
 Console.WriteLine("|      |  |      |  |      |  |      |");
 Console.WriteLine("|     A|  |     K|  |     Q|  |     J|");
 Console.WriteLine(" ------    ------    ------    ------\n");
+Console.WriteLine("Press any key to continue...\n");
 
 game.DealCards();
 
