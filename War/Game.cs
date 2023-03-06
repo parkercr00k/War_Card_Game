@@ -57,14 +57,24 @@ namespace War
             }
             else if (p1Card.Rank == p2Card.Rank)
             {
+                Random random = new Random();
                 InWar = true;
                 Console.WriteLine();
                 Console.WriteLine("It's a tie! Let's go to War!");
 
-                CardsInWar.Add(p1Card);
                 PlayerOne.Cards.Remove(p1Card);
-                CardsInWar.Add(p2Card);
+                CardsInWar.Add(p1Card);
                 PlayerTwo.Cards.Remove(p2Card);
+                CardsInWar.Add(p2Card);
+
+                // Draw an extra card and place it face down
+                Card warCardp1 = PlayerOne.Cards[random.Next(0, PlayerOne.Cards.Count)];
+                PlayerOne.Cards.Remove(warCardp1);
+                CardsInWar.Add(warCardp1);
+                Card warCardp2 = PlayerTwo.Cards[random.Next(0, PlayerTwo.Cards.Count)];
+                PlayerTwo.Cards.Remove(warCardp2);
+                CardsInWar.Add(warCardp2);
+
             }
             return outcome;
         }
@@ -93,7 +103,8 @@ namespace War
                 turnOutcome = CompareCards(drawnCard1, drawnCard2);
                 Console.WriteLine();
                 Console.WriteLine(PlayerOne.Name + " Cards: " + PlayerOne.Cards.Count);
-                Console.WriteLine(PlayerTwo.Name + " Cards: " + PlayerTwo.Cards.Count);
+                Console.WriteLine(PlayerTwo.Name + " Cards: " + PlayerTwo.Cards.Count + "\n");
+                Console.WriteLine("Press any key to continue...");
             }
 
             return turnOutcome;
