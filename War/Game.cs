@@ -43,7 +43,7 @@ namespace War
                 PlayerTwo.Cards.Remove(p2Card);
 
                 CheckForWar(PlayerOne);
-                
+
             }
             else if (p2Card.Rank > p1Card.Rank)
             {
@@ -85,13 +85,13 @@ namespace War
             if (PlayerOne.Cards.Count == 0)
             {
                 Console.WriteLine();
-                Console.WriteLine("GAME OVER: " + PlayerTwo.Name + " wins the game!");
+                Console.WriteLine("\nGAME OVER: " + PlayerTwo.Name + " wins the game!");
                 turnOutcome = "p2win";
             }
             else if (PlayerTwo.Cards.Count == 0)
             {
                 Console.WriteLine();
-                Console.WriteLine("GAME OVER: " + PlayerOne.Name + " wins the game!");
+                Console.WriteLine("\nGAME OVER: " + PlayerOne.Name + " wins the game!");
                 turnOutcome = "p1win";
             }
             else
@@ -102,9 +102,13 @@ namespace War
                 Card drawnCard2 = PlayerTwo.DrawCard();
                 turnOutcome = CompareCards(drawnCard1, drawnCard2);
                 Console.WriteLine();
-                Console.WriteLine(PlayerOne.Name + " Cards: " + PlayerOne.Cards.Count);
-                Console.WriteLine(PlayerTwo.Name + " Cards: " + PlayerTwo.Cards.Count + "\n");
-                Console.WriteLine("Press any key to continue...");
+                // If player's name ends with "s" it uses ' instead of 's at end of the name
+                if (!PlayerOne.Name.EndsWith("s"))
+                    Console.WriteLine(PlayerOne.Name + "'s Cards: " + PlayerOne.Cards.Count);
+                else
+                    Console.WriteLine(PlayerOne.Name + "' Cards: " + PlayerOne.Cards.Count);
+                Console.WriteLine(PlayerTwo.Name + "'s Cards: " + PlayerTwo.Cards.Count + "\n");
+                Console.Write("Press any key to continue...");
             }
 
             return turnOutcome;
