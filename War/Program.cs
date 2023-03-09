@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 using War;
 
 
@@ -10,10 +11,18 @@ Console.WriteLine("|      |  |      |  |      |  |      |");
 Console.WriteLine("|     A|  |     K|  |     Q|  |     J|");
 Console.WriteLine(" ------    ------    ------    ------\n");
 
-Console.WriteLine("Please enter your name and press enter:\n");
+Console.Write("Please enter your name and press enter: ");
 string playerName = Console.ReadLine();
+
+// A way to check if player name is empty
+while (string.IsNullOrEmpty(playerName))
+{
+    Console.Write("\nName can't be empty. Please enter your name again: ");
+    playerName = Console.ReadLine();
+}
+
 Console.WriteLine();
-Console.WriteLine("Hi " + playerName + "! Press any key to begin...");
+Console.Write("Hi " + playerName + "! Press any key to begin...");
 
 Player player = new Player(playerName);
 Player player2 = new Player("John");
@@ -39,3 +48,15 @@ while (!done)
         turnOutcome = game.PlayTurn();
     }
 }
+
+ConsoleKeyInfo cki;
+
+Console.WriteLine("\nPress the Escape (Esc) key to quit: ");
+do
+{
+    cki = Console.ReadKey();
+}
+while (cki.Key != ConsoleKey.Escape);
+
+
+
